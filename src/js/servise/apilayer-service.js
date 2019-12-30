@@ -1,7 +1,7 @@
 class ApilayerService {
     constructor() {
         this._apiBase = `http://www.apilayer.net/api/live`
-        this._key = `?access_key=07906bf429aa1fdcf30cc8b3e2e4a89c` //999ae317386e92319765439d60d49721
+        this._key = `?access_key=999ae317386e92319765439d60d49721` //999ae317386e92319765439d60d49721
     }
    
 
@@ -21,3 +21,5 @@ class ApilayerService {
     }
 }
 
+const apilayerService = new ApilayerService()
+export default apilayerService
