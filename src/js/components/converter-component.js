@@ -1,6 +1,6 @@
 import Component from './component.js'
 import store from '../store/index.js'
-
+import apilayerServise from '../servise/apilayer-service.js'
 
 export default class ConverterComponent extends Component {
     constructor() {
@@ -55,15 +55,14 @@ export default class ConverterComponent extends Component {
                     alert(`bad amount curency`)
                 }
                 else {
-                    fetch(`http://www.apilayer.net/api/live?access_key=07906bf429aa1fdcf30cc8b3e2e4a89c&currencies=${selectedFromCurrency.value},${selectedToCurrency.value}&source=USD&format=1`)
-                    .then(res => res.json())
-                    .then(res => {                    
+                    apilayerServise.getCurrencies(selectedFromCurrency.value, selectedToCurrency.value)
+                    .then(res => {
                         store.dispatch('getAmountCurrency', amountCurrency.value, store.state)
                         store.dispatch('getUsdFrom', res.quotes[`USD${selectedFromCurrency.value}`], store.state)
                         store.dispatch('getUsdTo', res.quotes[`USD${selectedToCurrency.value}`], store.state)
                         store.dispatch('convertCurrency', store.state)
-                        resultConvertInput.value = store.state.currencyAfterConvert                    
-                    })
+                        resultConvertInput.value = store.state.currencyAfterConvert     
+                    })                   
                 }               
             })                        
         })     
